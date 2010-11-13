@@ -2,19 +2,19 @@
   display:block;
   margin:10px auto;
   position:relative;
-  width:1190px;
+  width:1390px;
 }
 #product_backlog_container{
   position:absolute;
   right:0;
   top:0;
-  width:590px;
+  width:690px;
 }
 #sprint_backlogs_container{
   left:0;
   position:absolute;
   top:0;
-  width:590px;
+  width:690px;
 }
 #product_backlog_container .backlog .header > .add_new_story {
   font-size:11px;
@@ -296,16 +296,39 @@
 #backlogs_container .stories .story .status_id .v {
   display:none;
 }
-#backlogs_container .stories .story .story_points {
+#backlogs_container .stories .story .assigned_to_id.editable {
   display:block;
   height:15px;
   right:10px;
+  padding:5px 2px 4px 9px;
+  position:absolute;
+  top:1px;
+  width:80px;
+}
+#backlogs_container .stories .story .assigned_to_id .v {
+  display:none;
+}
+#backlogs_container .stories .story .story_points {
+  display:block;
+  height:15px;
+  left:525px;
   overflow:hidden;
   padding:5px 3px 4px 9px;
   position:absolute;
-  text-align:right;
+  text-align:left;
   top:1px;
-  width:28px;
+  width:20px;
+}
+#backlogs_container .stories .story .estimated_hours {
+  display:block;
+  height:15px;
+  left:550px;
+  overflow:hidden;
+  padding:5px 3px 4px 9px;
+  position:absolute;
+  text-align:left;
+  top:1px;
+  width:25px;
 }
 #backlogs_container .stories .story .fixed_version_id,
 #backlogs_container .stories .story .higher_item_id {
@@ -432,9 +455,19 @@
 #backlogs_container .stories .story.editing .story_points.editor{
   display:block;
   height:10px;
-  left:540px;
+  left:530px;
+  padding:5px 1px 4px 1px;
+  width: 16px;
   margin:0;
   top:1px;
+}
+#backlogs_container .stories .story.editing .assigned_to_id.editor{
+  display:block;
+  height: 22px;
+  left:590px;
+  margin:0;
+  top:1px;
+  width:100px;
 }
 
 
@@ -444,6 +477,7 @@
 .debug .story .id,
 .debug .story .subject,
 .debug .story .status_id,
+.debug .story .assigned_to_id,
 .debug .story .story_points,
 .debug .sprint .name,
 .debug .sprint .sprint_start_date,

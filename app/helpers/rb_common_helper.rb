@@ -100,6 +100,14 @@ module RbCommonHelper
   def tracker_name_or_empty(story)
     story.new_record? ? "" : story.tracker.name
   end
+
+  def assigned_to_id_or_empty(story)
+    story.new_record? ? "" : story.assigned_to_id
+  end
+
+  def assigned_to_name_or_empty(story)
+    (story.new_record? || story.assigned_to.nil?) ? "" : story.assigned_to.name
+  end
   
   def updated_on_with_milliseconds(story)
     date_string_with_milliseconds(story.updated_on, 0.001) unless story.blank?

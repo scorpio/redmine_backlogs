@@ -4,20 +4,22 @@ class Story < Issue
     acts_as_list :scope => :project
 
     def self.condition(project_id, sprint_id, extras=[])
+      projects = Project.find(project_id).self_and_descendants
       if sprint_id.nil?  
         c = ["
-          parent_id is NULL
-          and project_id = ?
+          project_id in (?) 
           and tracker_id in (?)
+          and parent_id is NULL
           and fixed_version_id is NULL
-          and is_closed = ?", project_id, Story.trackers, false]
+	      and story_points is not NULL 
+          and is_closed = ?", projects, Story.trackers, false]
       else
         c = ["
-          parent_id is NULL
-          and project_id = ?
+          project_id in (?) 
           and tracker_id in (?)
+          and parent_id is NULL
           and fixed_version_id = ?",
-          project_id, Story.trackers, sprint_id]
+          projects, Story.trackers, sprint_id]
       end
 
       if extras.size > 0
@@ -152,6 +154,7 @@ class Story < Issue
     def update_and_position!(params)
       attribs = params.select{|k,v| k != 'id' and Story.column_names.include? k }
       attribs = Hash[*attribs.flatten]
+      attribs.delete "project_id"
       result = journalized_update_attributes attribs
       if result and params[:prev]
         move_after(params[:prev])
